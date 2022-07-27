@@ -1,4 +1,4 @@
-import { fromFileUrl, parse } from "./deps.ts";
+import { fromFileUrl, parse, resolve } from "./deps.ts";
 
 const args = parse(Deno.args);
 const type: "hook" | "fc" = (() => {
@@ -69,4 +69,6 @@ await Deno.writeTextFile(
   replace({ text, type, name }),
 );
 
+const newFilePath = resolve(Deno.cwd(), `${path}${name}.txt`)
+console.log(`created: ${newFilePath}`)
 console.log("finish");
