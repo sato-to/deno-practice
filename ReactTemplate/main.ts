@@ -50,25 +50,38 @@ const template = (() => {
       return "./templates/fc.tsx";
   }
 })();
-const path = (() => {
-  const path = args.p || args.path || "./";
-
-  if (path.slice(-1) === "/") {
-    return path;
-  }
-  return path + "/";
-})();
 const name = args.n || args.name || args._[0];
+const newFilePath = (() => {
+  const path = (() => {
+    const path = args.p || args.path || "./";
+
+    if (path.slice(-1) === "/") {
+      return path;
+    }
+    return path + "/";
+  })();
+
+  const fileName = (() => {
+    if (type === "fc") {
+      return name;
+    }
+    if (name.startsWith("use")) {
+      return name;
+    }
+    return `use${capitalizeFirst(name)}`;
+  })();
+
+  return `${path}${fileName}.tsx`;
+})();
 
 const text = await Deno.readTextFile(
   fromFileUrl(new URL(template, import.meta.url)),
 );
 
 await Deno.writeTextFile(
-  `${path}${name}.tsx`,
+  newFilePath,
   replace({ text, type, name }),
 );
 
-const newFilePath = resolve(Deno.cwd(), `${path}${name}.txt`)
-console.log(`created: ${newFilePath}`)
+console.log(`created: ${resolve(Deno.cwd(), newFilePath)}`);
 console.log("finish");
