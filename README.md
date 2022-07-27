@@ -1,7 +1,9 @@
 # deno-practice
+
 - denoのサンプルプログラム
 
 ## deno コマンド
+
 ```shell
 # lint / format
 $ deno fmt
@@ -18,6 +20,7 @@ $ deno uninstall sample-command
 ```
 
 ## File
-|name|description|
---|--|
-|ReactTemplate|Reactの雛形ファイルを作成するプログラム|
+
+| name          | description            |
+| ------------- | ---------------------- |
+| ReactTemplate | Reactの雛形ファイルを作成するプログラム |

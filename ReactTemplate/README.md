@@ -1,8 +1,9 @@
 # React Template
+
 - Reactのテンプレートファイルを作成する
 
 # How to use
- 
+
 ```shell
 # コマンドを登録
 $ deno install --allow-read --allow-write --force --name react-template main.ts
@@ -14,5 +15,5 @@ react-template -t hook Hoge
 react-template -t hook -p ../front/app Hoge
 
 # Functional Componentの雛形を作成
-react-template -t fc Hoge 
+react-template -t fc Hoge
 ```

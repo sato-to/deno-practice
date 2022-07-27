@@ -1,7 +1,6 @@
-import { parse } from "./deps.ts";
+import { fromFileUrl, parse } from "./deps.ts";
 
 const args = parse(Deno.args);
-
 const type: "hook" | "fc" = (() => {
   const type = args.t || args.type;
   switch (type) {
@@ -40,7 +39,7 @@ const replace = (
   return text.replaceAll("Sample", capitalizeFirst(keyword)).replaceAll(
     "// @ts-ignore\n",
     "",
-  ).replaceAll(';', '');
+  ).replaceAll(";", "");
 };
 
 const template = (() => {
@@ -61,7 +60,9 @@ const path = (() => {
 })();
 const name = args.n || args.name || args._[0];
 
-const text = await Deno.readTextFile(template);
+const text = await Deno.readTextFile(
+  fromFileUrl(new URL(template, import.meta.url)),
+);
 
 await Deno.writeTextFile(
   `${path}${name}.tsx`,
