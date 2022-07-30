@@ -77,7 +77,7 @@ const replaceTemplate = (
   })();
 
   return templateText.replaceAll("Sample", capitalizeFirst(keyword)).replaceAll(
-    "// @ts-ignore\n",
+    "// @ts-nocheck\n",
     "",
   ).replaceAll(";", "");
 };
