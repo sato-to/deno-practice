@@ -4,7 +4,7 @@ export type FileType = "fc" | "hook";
 
 const parseArgs = (
   _args: string[],
-): { type: FileType; name: string; path: string; help: boolean } => {
+): { type: FileType; name: string; help: boolean } => {
   const args = parse(_args);
 
   const type: FileType = (() => {
@@ -19,15 +19,6 @@ const parseArgs = (
       default:
         return "fc";
     }
-  })();
-
-  const path = (() => {
-    const path = args.p || args.path || "./";
-
-    if (path.slice(-1) === "/") {
-      return path;
-    }
-    return path + "/";
   })();
 
   const name = (() => {
@@ -46,7 +37,6 @@ const parseArgs = (
   return {
     name,
     type,
-    path,
     help: args.hasOwnProperty("h") || args.hasOwnProperty("help"),
   };
 };
