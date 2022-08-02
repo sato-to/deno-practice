@@ -23,7 +23,7 @@ if (help) {
   const text = await Deno.readTextFile(
     fromFileUrl(new URL(template, import.meta.url)),
   );
-  //テンプレート置換＆ファイル作成
+  //テンプレート置換＆クリップボードに貼り付け
   const command = await Deno.run({
     cmd: ["pbcopy"],
     stdin: "piped",
