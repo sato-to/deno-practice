@@ -26,11 +26,18 @@ if (help) {
     fromFileUrl(new URL(template, import.meta.url)),
   );
   //テンプレート置換＆ファイル作成
-  await Deno.writeTextFile(
-    newFilePath,
-    replaceTemplate({ templateText: text, type, fileName: name }),
+  const command = await Deno.run({
+    cmd: ["pbcopy"],
+    stdin: "piped",
+  });
+  await command.stdin?.write(
+    new TextEncoder().encode(
+      replaceTemplate({ templateText: text, type, fileName: name }),
+    ),
   );
+  command.stdin?.close();
+  command.status();
 
-  console.log(`created: ${resolve(Deno.cwd(), newFilePath)}`);
+  console.log('copy to clipboard!');
   console.log("finish");
 }
